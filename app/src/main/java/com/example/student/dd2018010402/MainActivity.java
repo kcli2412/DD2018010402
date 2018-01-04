@@ -2,19 +2,23 @@ package com.example.student.dd2018010402;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     ListView lv;
+    String str[];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        String str[] = new String[] {"AA", "BB", "CC"};
+        str = new String[] {"AA", "BB", "CC"};
         lv = findViewById(R.id.listView);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 MainActivity.this,
@@ -22,5 +26,12 @@ public class MainActivity extends AppCompatActivity {
                 str
         );
         lv.setAdapter(adapter);
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(MainActivity.this, str[i], Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
